@@ -1,6 +1,11 @@
 import User from '../models/User';
 
 class UserControll {
+  async index(req, res) {
+    const users = await User.findAll();
+    return res.json(users);
+  }
+
   async store(req, res) {
     const userExists = await User.findOne({ where: { email: req.body.email } });
     if (userExists) {
@@ -15,6 +20,11 @@ class UserControll {
       email,
       provider,
     });
+  }
+
+  async update(req, res) {
+    console.log(req.userId);
+    res.json({ ok: true });
   }
 }
 
